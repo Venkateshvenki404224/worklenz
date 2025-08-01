@@ -10,7 +10,7 @@ services:
       - backend
     restart: unless-stopped
     env_file:
-      - ./worklenz-frontend/.env.production
+      - ./worklenz-frontend/.env.development
     networks:
       - worklenz
 
