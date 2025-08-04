@@ -9,8 +9,8 @@ RUN npm ci
 COPY . .
 
 # Create env-config.js dynamically during build
-RUN echo "window.VITE_API_URL='${VITE_API_URL:-http://backend:3000}';" > ./public/env-config.js && \
-    echo "window.VITE_SOCKET_URL='${VITE_SOCKET_URL:-ws://backend:3000}';" >> ./public/env-config.js
+RUN echo "window.VITE_API_URL='${VITE_API_URL:-http://worklenz.buildwithhussain.com:3000}';" > ./public/env-config.js && \
+    echo "window.VITE_SOCKET_URL='${VITE_SOCKET_URL:-ws://worklenz.buildwithhussain.com:3000}';" >> ./public/env-config.js
 
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build
 
@@ -27,8 +27,8 @@ COPY --from=build /app/public/env-config.js /app/build/env-config.js
 RUN echo '#!/bin/sh' > /app/env-config.sh && \
     echo '# Update env-config.js with runtime environment variables' >> /app/env-config.sh && \
     echo 'cat > /app/build/env-config.js << EOL' >> /app/env-config.sh && \
-    echo 'window.VITE_API_URL="${VITE_API_URL:-http://backend:3000}";' >> /app/env-config.sh && \
-    echo 'window.VITE_SOCKET_URL="${VITE_SOCKET_URL:-ws://backend:3000}";' >> /app/env-config.sh && \
+    echo 'window.VITE_API_URL="${VITE_API_URL:-http://worklenz.buildwithhussain.com:3000}";' >> /app/env-config.sh && \
+    echo 'window.VITE_SOCKET_URL="${VITE_SOCKET_URL:-ws://worklenz.buildwithhussain.com:3000}";' >> /app/env-config.sh && \
     echo 'EOL' >> /app/env-config.sh && \
     chmod +x /app/env-config.sh
 
